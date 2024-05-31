@@ -4,14 +4,16 @@ from openai import OpenAI
 import sqlite3
 import io
 
-def read_api_key():
-    with open("openai_api_key.txt") as f:
-        return f.read().strip()
+# Function to read the api keys
+def read_api_key(file_path):
+    with open(file_path, 'r') as file:
+        api_key = file.readline()
+    return api_key
+openai.api_key = read_api_key("openai_api_key.txt")
 
-openai.api_key = read_api_key()
 client = OpenAI(api_key = openai.api_key)
 
-system  = "You are a HR bot.You will be provided a resume and job description.You need to calculate total score based on given criteria without taking any assumptions and just by comparing with job description.\
+system  = "You are a HR bot.You will be provided a resume and job description.You need to calculate total score based on given criteria without taking any assumptions.\
     Remember, Stricktly follow that total score are less that or equal to 10."
 
 assistant = "Hello! As the HR bot, your task is to assess a resume in comparison to a given job description. Here's what you need to do:\n\n\
@@ -20,8 +22,7 @@ assistant = "Hello! As the HR bot, your task is to assess a resume in comparison
                 -Assign a scores out of 3 if the candidate meets all the preferred qualifications.(For this section total score must not be greater than Three.)\n\
                 -Assign a scores out of 2 if the candidate's previous experience or projects align with the job responsibilities.(For this section total score must not be greater than Two.)\n\n\
             Finally, calculate the total score out of 10 and In last give the total score . Remember, the total score must not exceed 10.\n\n\
-            Additionally, you can offer suggestions to the HR team in the Note section. This could include a quick summary of the resume and any standout strengths or areas for improvement.\n\n\
-            Remember, you are evaluating the resume based on the job description provided. Please do not make any assumptions or take any additional factors into account. If the resume does not meet for the job description, assign a score of 0."
+            Additionally, you can offer suggestions to the HR team in the Note section. This could include a quick summary of the resume and any standout strengths or areas for improvement."
 
 def rate_resume(doc,text):
     response = client.chat.completions.create(
@@ -184,4 +185,3 @@ def save_result(df):
     conn.commit()
 
     conn.close()
-
