@@ -40,7 +40,9 @@ streamlit run app.py
 2. requirements.txt: This file contains the required libraries to run the system.
 3. README.md: This file contains the information about the project.
 4. resumescoringsystem.py : This file contains the functions which I use in the app.py file.
+5. openai_api_key.txt : This file contains openai api key.This file is not included in the repo you need to create that one for yourself.
 
+   
 ## Libraries used
 1. Streamlit
 2. PyPDF2
