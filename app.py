@@ -42,11 +42,6 @@ def get_info():
     st.write('2. https://www.streamlit.io/')
     st.write('3. https://www.openai.com/')
 
-# Function to display messages
-def display_message(message):
-    placeholder = st.empty()  # Create an empty placeholder
-    placeholder.write(message)
-    
 
 def process(files,uploaded_job_file):
     df = pd.DataFrame()
@@ -168,12 +163,10 @@ if st.sidebar.button('Generate Scores'):
                     file_name="result.csv",
                     mime="text/csv",
                 )
-                flag = 1
                 st.write('The resumes are rated successfully. Please check the notes below')
                 for i,note in enumerate(df['Note']):
                     st.write(f'Resume {i+1}')
                     st.markdown(note)
-
 with st.sidebar:
     st.header("👩‍💻 **About the Creator**")
     st.write("I am a Data Science enthusiast with a passion for solving real-world problems using data. I have experience in building machine learning models, data analysis, and data visualization. I am always eager to learn new technologies and explore new domains. I am currently looking for opportunities in Data Science and Machine Learning.")
@@ -182,4 +175,3 @@ with st.sidebar:
     #st.write("[🌐 Portfolio](https://www.google.com/)") 
     st.write("[📧 Email](mailto:kirtipogra@gmail.com)")
     st.write("[📝 LinkedIn](https://www.linkedin.com/in/kirti-pogra/)")
-
