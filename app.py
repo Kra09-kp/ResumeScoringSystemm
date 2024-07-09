@@ -40,8 +40,12 @@ def get_info():
     st.header('11. References')
     st.write('1. https://pandas.pydata.org/docs/')
     st.write('2. https://www.streamlit.io/')
-    st.write('3. https://www.openai.com/')
-
+    
+# Function to display messages
+def display_message(message):
+    placeholder = st.empty()  # Create an empty placeholder
+    placeholder.write(message)
+    
 
 def process(files,uploaded_job_file):
     df = pd.DataFrame()
@@ -81,7 +85,7 @@ def process(files,uploaded_job_file):
     with st.spinner("Getting the scores..."):
         progress = st.progress(0)
         for (i,response) in enumerate(responses):
-            score = rs.find_score(response)
+            score = rs.find_score(response,job_description)
             msg = f'{i+1} files scored successfully'
             print(msg)
             progress.progress((i+1)/len(responses))
@@ -102,7 +106,7 @@ def process(files,uploaded_job_file):
     return df
     
 # Set the page configuration
-st.set_page_config(page_title='Resume Scoring System', page_icon='logo.png' , layout='centered', initial_sidebar_state='auto')
+st.set_page_config(page_title='Resume Scoring System', page_icon='logo.png' , layout='wide', initial_sidebar_state='auto')
 st.title('Resume Scoring System')
 
 st.caption('This webapp is used to rate the resumes based on the job description')
@@ -127,11 +131,24 @@ uploaded_job_file = st.sidebar.file_uploader('Upload the job description file', 
 
 # Upload the resume files
 uploaded_file = st.sidebar.file_uploader('Upload the resume files', type=['pdf'], accept_multiple_files=True)
-st.sidebar.caption('As this is a demo version, you can upload only 4 resumes')
+st.sidebar.caption('As this is a demo version, you can upload only 5 resumes')
 files = []
 
 job_description = ''
 # Generate the scores
+def sample():
+    st.divider()
+    st.write("Result will look like this which you can download if you need :)")
+    st.caption("Here sample are generated for Data Science related job.")
+    st.write("Sample 1:")
+    sample1 = pd.read_csv("result.csv")
+    st.write(sample1)
+    st.write("Sample 2:")
+    sample2 = pd.read_csv("result1.csv")
+    st.write(sample2)
+    st.write("Sample 3:")
+    sample3 = pd.read_csv("result2.csv")
+    st.write(sample3)
 
 if st.sidebar.button('Generate Scores'):
     if not uploaded_file or not uploaded_job_file:
@@ -139,8 +156,8 @@ if st.sidebar.button('Generate Scores'):
     else:
         st.caption('It may take some time to process the files. Please wait...')
         rs.save_job_description(uploaded_job_file.name,uploaded_job_file)
-        if len(uploaded_file) > 4:
-            st.warning('You have uploaded more than 4 files.Please upload only 5 files.')
+        if len(uploaded_file) > 6:
+            st.warning('You have uploaded more than 5 files.Please upload only 5 files.')
         else:
             for (i,file) in enumerate(uploaded_file):
                 rs.save_file(file.name,file)
@@ -163,15 +180,19 @@ if st.sidebar.button('Generate Scores'):
                     file_name="result.csv",
                     mime="text/csv",
                 )
+                flag = 1
                 st.write('The resumes are rated successfully. Please check the notes below')
                 for i,note in enumerate(df['Note']):
                     st.write(f'Resume {i+1}')
                     st.markdown(note)
+else:
+    sample()                               
+
 with st.sidebar:
     st.header("👩‍💻 **About the Creator**")
     st.write("I am a Data Science enthusiast with a passion for solving real-world problems using data. I have experience in building machine learning models, data analysis, and data visualization. I am always eager to learn new technologies and explore new domains. I am currently looking for opportunities in Data Science and Machine Learning.")
     st.write("Let's connect to explore opportunities, share knowledge, and collaborate on exciting projects!") 
     st.write("🔗 **Connect with Me:**")
-    #st.write("[🌐 Portfolio](https://www.google.com/)") 
+    st.write("[🌐 Portfolio](https://www.kirtipogra.me/)") 
     st.write("[📧 Email](mailto:kirtipogra@gmail.com)")
     st.write("[📝 LinkedIn](https://www.linkedin.com/in/kirti-pogra/)")
