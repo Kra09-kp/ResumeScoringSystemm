@@ -10,7 +10,7 @@
 
 
 ## Introduction
-This project is a resume scoring system that scores resumes based on the job description. The system uses a pre-trained Openai model named chat-gpt to score resumes. The system is built using the Streamlit library in Python. The system is deployed on Strealit sharing platform.
+This project is a resume-scoring system based on the job description. The system uses a pre-trained Openai model named chat-GPT to score resumes. The system is built using the Streamlit library in Python. The system is deployed on the Strealit sharing platform.
 
 ## How to use the system
 
@@ -18,7 +18,7 @@ This project is a resume scoring system that scores resumes based on the job des
 2. Upload the pdf file of the job description.
 3. Upload the pdf file of the resumes.
 4. Click on the "Generate Score" button to get the scores of the resumes.
-5. You can download the result in csv file format by clicking on the "Download Result" button.
+5. You can download the result in CSV file format by clicking the "Download Result" button.
 
 ## How to run the system locally
 
@@ -38,19 +38,19 @@ streamlit run app.py
 ## File included 
 1. app.py: This file contains the code for the resume scoring system.
 2. requirements.txt: This file contains the required libraries to run the system.
-3. README.md: This file contains the information about the project.
-4. resumescoringsystem.py : This file contains the functions which I use in the app.py file.
-5. openai_api_key.txt : This file contains openai api key.This file is not included in the repo you need to create that one for yourself.
+3. README.MD: This file contains information about the project.
+4. resumescoringsystem.py: This file contains the functions that I use in the app.py file.
+5. genai_api_key.txt: This file contains genai api key. This file is not included in the repo you need to create that one for yourself.
 
    
 ## Libraries used
 1. Streamlit
 2. PyPDF2
-3. Openai
+3. genai
 4. Pandas
 
 ## Conclusion
-The resume scoring system is a useful tool for HR professionals to score resumes based on the job description. The system uses a pre-trained Openai model to score resumes. The system is built using the Streamlit library in Python. The system is deployed on the Streamlit sharing platform.
+The resume scoring system is useful for HR professionals to score resumes based on the job description. The system uses a pre-trained Openai model to score resumes. The system is built using the Streamlit library in Python. The system is deployed on the Streamlit sharing platform.
 
 
 
